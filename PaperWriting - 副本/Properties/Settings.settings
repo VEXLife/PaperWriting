@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PaperWriting.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WidthLimit" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HyperRef" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Formula" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{SEQ 公式}</Value>
+    </Setting>
+    <Setting Name="Figure" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Table" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Title_1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Title_2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Title_3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FigurePosition" Type="PaperWriting.TargetPosition" Scope="User">
+      <Value Profile="(Default)">Above</Value>
+    </Setting>
+    <Setting Name="TablePosition" Type="PaperWriting.TargetPosition" Scope="User">
+      <Value Profile="(Default)">Above</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

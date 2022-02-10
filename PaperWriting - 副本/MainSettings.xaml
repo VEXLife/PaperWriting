@@ -1,0 +1,62 @@
+﻿<Page x:Class="PaperWriting.MainSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PaperWriting"
+             xmlns:prop="clr-namespace:PaperWriting.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="1947.2" d:DesignWidth="400"
+      Title="MainSettings">
+
+    <Page.Resources>
+        <Style x:Key="title" TargetType="Label">
+            <Setter Property="FontFamily" Value="微软雅黑" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Foreground" Value="#010101" />
+            <Setter Property="Margin" Value="20,30" />
+        </Style>
+        <local:TargetPositionComboBoxItems x:Key="target_pos" />
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource title}">公式</Label>
+            <local:SettingsItem SettingItemName="插入的内容" SettingItemTip="使用{}包裹域代码，转义符号\{和\}表示普通的花括弧。&#13;可以使用UnicodeMath关键字。"
+                                SettingItemValue="{Binding Path=Formula,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Text"
+                                Margin="30,3" Height="140" />
+            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource title}">图片</Label>
+            <local:SettingsItem SettingItemName="图片描述文本" SettingItemTip="使用{}包裹域代码，转义符号\{和\}表示普通的花括弧。"
+                                SettingItemValue="{Binding Path=Figure,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Text"
+                                Margin="30,3" Height="140" />
+            <local:SettingsItem SettingItemName="图片出现在" SettingItemTip=""
+                                SettingItemValue="{Binding Path=FigurePosition,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                            SettingItemType="Option" SettingItemOptions="{StaticResource target_pos}"
+                            Margin="30,3" />
+            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource title}">表格</Label>
+            <local:SettingsItem SettingItemName="表格描述文本" SettingItemTip="使用{}包裹域代码，转义符号\{和\}表示普通的花括弧。" 
+                                SettingItemValue="{Binding Path=Table,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Text"
+                                Margin="30,3" Height="140" />
+            <local:SettingsItem SettingItemName="表格出现在" SettingItemTip=""
+                                SettingItemValue="{Binding Path=TablePosition,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                            SettingItemType="Option" SettingItemOptions="{StaticResource target_pos}"
+                            Margin="30,3" />
+            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource title}">标题</Label>
+            <local:SettingsItem SettingItemName="一级标题" SettingItemTip="使用{}包裹域代码，转义符号\{和\}表示普通的花括弧。" 
+                                SettingItemValue="{Binding Path=Title_1,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Text"
+                                Margin="30,3" Height="140" />
+            <local:SettingsItem SettingItemName="二级标题" SettingItemTip="使用{}包裹域代码，转义符号\{和\}表示普通的花括弧。" 
+                                SettingItemValue="{Binding Path=Title_2,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Text"
+                                Margin="30,3" Height="140" />
+            <local:SettingsItem SettingItemName="三级标题" SettingItemTip="使用{}包裹域代码，转义符号\{和\}表示普通的花括弧。" 
+                                SettingItemValue="{Binding Path=Title_3,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Text"
+                                Margin="30,3" Height="140" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

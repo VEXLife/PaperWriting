@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="PaperWriting.SettingsContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PaperWriting"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="tb_style" TargetType="{x:Type ContentControl}">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <Grid x:Name="bg">
+                            <Grid.Background>
+                                <SolidColorBrush x:Name="bg_brush" Color="Transparent"></SolidColorBrush>
+                            </Grid.Background>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="bg_brush"
+                                                            Storyboard.TargetProperty="Color"
+                                                            To="#94ccfecc"
+                                                            Duration="0:0:0.15" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState Name="Normal">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="bg_brush"
+                                                            Storyboard.TargetProperty="Color"
+                                                            To="Transparent"
+                                                            Duration="0:0:0.15" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter></ContentPresenter>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="tb_label" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,0,30,0" />
+            <Setter Property="Foreground" Value="#fefefe" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Storyboard x:Key="HideStackPanel">
+            <DoubleAnimation Storyboard.TargetName="nav_pnl" 
+                                                     Storyboard.TargetProperty="Width" 
+                                                     BeginTime="0:0:0" Duration="0:0:0.2"
+                                                     To="60"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="ShowStackPanel">
+            <DoubleAnimation Storyboard.TargetName="nav_pnl" 
+                                                     Storyboard.TargetProperty="Width" 
+                                                     BeginTime="0:0:0" Duration="0:0:0.2"
+                                                     To="190"></DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid Background="#fdfefd">
+        <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" />
+        <Grid Background="#028944" x:Name="nav_pnl" Width="60" HorizontalAlignment="Left">
+            <StackPanel>
+                <ToggleButton x:Name="menu_btn"
+                              Height="40"
+                              Margin="0,20,0,30"
+                              BorderThickness="0"
+                              Style="{StaticResource tb_style}"
+                              LostFocus="menu_btn_LostFocus">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="130" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="Pack://Application:,,,/PaperWriting;component/Resources/menu.png" Stretch="None" Grid.Column="0">
+                        </Image>
+                        <Label Grid.Column="1" Style="{StaticResource tb_label}">菜单</Label>
+                    </Grid>
+                    <ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard Storyboard="{StaticResource HideStackPanel}" />
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard Storyboard="{StaticResource ShowStackPanel}" />
+                        </EventTrigger>
+                    </ToggleButton.Triggers>
+                </ToggleButton>
+                <ListBox BorderThickness="0" Background="Transparent" Foreground="#fdfefd" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Name="nav_btn_container">
+                    <ListBox.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource tb_style}" TargetType="ListBoxItem">
+                            <Setter Property="ItemsControl.Padding" Value="0" />
+                            <Setter Property="ItemsControl.BorderThickness" Value="0" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBoxItem Selected="NavBar_Selected" Name="settings">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="59" />
+                                <ColumnDefinition Width="130" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Pack://Application:,,,/PaperWriting;component/Resources/settings.png" Stretch="None" Grid.Column="0">
+                            </Image>
+                            <Label Grid.Column="1" Style="{StaticResource tb_label}">主要设置</Label>
+                        </Grid>
+                    </ListBoxItem>
+                    <ListBoxItem Selected="NavBar_Selected" Name="info">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="59" />
+                                <ColumnDefinition Width="130" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Pack://Application:,,,/PaperWriting;component/Resources/info.png" Stretch="None" Grid.Column="0">
+                            </Image>
+                            <Label Grid.Column="1" Style="{StaticResource tb_label}">关于</Label>
+                        </Grid>
+                    </ListBoxItem>
+                </ListBox>
+            </StackPanel>
+            <Canvas>
+                <Rectangle Width="2" Height="40" Fill="#fefdfe" HorizontalAlignment="Left" Margin="0,90,0,0">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform x:Name="nav_rect_trans" />
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Canvas>
+        </Grid>
+    </Grid>
+</UserControl>

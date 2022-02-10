@@ -1,0 +1,35 @@
+﻿<Page x:Class="PaperWriting.About"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PaperWriting"
+             mc:Ignorable="d" 
+             d:DesignHeight="402.709" d:DesignWidth="556.145">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,30">
+            <Image Source="Pack://Application:,,,/PaperWriting;component/Resources/icons8-about-48.png" Stretch="None" />
+                <Label Margin="20,0" FontSize="30" FontFamily="微软雅黑" VerticalAlignment="Center">论文辅助加载项</Label>
+            </StackPanel>
+            <TextBlock Name="versionLabel" Margin="20,0" />
+            <DockPanel Margin="20,0" LastChildFill="False">
+                <TextBlock Text="适用于Microsoft Word的版本。" VerticalAlignment="Center" DockPanel.Dock="Left" />
+                <Image Source="Pack://Application:,,,/PaperWriting;component/Resources/icons8-microsoft-word-2019-48.png" Stretch="None" DockPanel.Dock="Right" />
+            </DockPanel>
+            <TextBlock Text="图标来自" Margin="20,10" />
+            <Grid Margin="20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="Pack://Application:,,,/PaperWriting;component/Resources/icons8-icons8-48.png" Stretch="Uniform" Grid.Column="0" MouseUp="To_Icons8" />
+                <TextBlock Hyperlink.Click="To_Icons8" VerticalAlignment="Center" Text="Icons 8" Grid.Column="1" TextDecorations="Underline" Foreground="#25b03b" />
+                <Image Source="Pack://Application:,,,/PaperWriting;component/Resources/feathericons.png" Stretch="Uniform" Grid.Column="2" MouseUp="To_Feathers" />
+                <TextBlock Hyperlink.Click="To_Feathers" VerticalAlignment="Center" Text="Icons 8" Grid.Column="3" TextDecorations="Underline" Foreground="#000000" />
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
