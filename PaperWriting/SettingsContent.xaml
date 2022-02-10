@@ -66,7 +66,7 @@
     </UserControl.Resources>
 
     <Grid Background="#fdfefd">
-        <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" />
+        <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" Margin="60,0,0,0" />
         <Grid Background="#028944" x:Name="nav_pnl" Width="60" HorizontalAlignment="Left">
             <StackPanel>
                 <ToggleButton x:Name="menu_btn"
