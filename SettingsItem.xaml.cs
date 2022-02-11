@@ -48,11 +48,12 @@ namespace PaperWriting
 
     public enum SettingItemTypeEnum
     {
-        Text, Option
+        RichText, Text, Option
     }
 
     public class SettingItemSelector : DataTemplateSelector
     {
+        public DataTemplate RichTextTmpl { get; set; }
         public DataTemplate TextTmpl { get; set; }
         public DataTemplate OptionTmpl { get; set; }
 
@@ -61,6 +62,8 @@ namespace PaperWriting
             if (item == null) return null;
             switch ((SettingItemTypeEnum)item)
             {
+                case SettingItemTypeEnum.RichText:
+                    return RichTextTmpl;
                 case SettingItemTypeEnum.Text:
                     return TextTmpl;
                 case SettingItemTypeEnum.Option:

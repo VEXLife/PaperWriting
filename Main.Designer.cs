@@ -38,6 +38,8 @@
             Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl2 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.Insert = this.Factory.CreateRibbonGroup();
+            this.widthlimit = this.Factory.CreateRibbonEditBox();
+            this.quotes = this.Factory.CreateRibbonGroup();
             this.headers = this.Factory.CreateRibbonGallery();
             this.h1 = this.Factory.CreateRibbonButton();
             this.h2 = this.Factory.CreateRibbonButton();
@@ -45,12 +47,10 @@
             this.insert_figs = this.Factory.CreateRibbonSplitButton();
             this.from_file = this.Factory.CreateRibbonButton();
             this.from_clipboard = this.Factory.CreateRibbonButton();
-            this.widthlimit = this.Factory.CreateRibbonEditBox();
             this.inmaths = this.Factory.CreateRibbonButton();
             this.insert_label = this.Factory.CreateRibbonSplitButton();
             this.tablelabel = this.Factory.CreateRibbonButton();
             this.figlabel = this.Factory.CreateRibbonButton();
-            this.quotes = this.Factory.CreateRibbonGroup();
             this.addQuote = this.Factory.CreateRibbonGallery();
             this.show_refTaskPane = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
@@ -77,6 +77,29 @@
             this.Insert.Label = "论文插入";
             this.Insert.Name = "Insert";
             this.Insert.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Insert_DialogLauncherClick);
+            // 
+            // widthlimit
+            // 
+            this.widthlimit.Image = global::PaperWriting.Properties.Resources.icons8_调整水平_48;
+            this.widthlimit.Label = "限宽：";
+            this.widthlimit.Name = "widthlimit";
+            this.widthlimit.ScreenTip = "限制插入的图片宽度";
+            this.widthlimit.ShowImage = true;
+            this.widthlimit.SizeString = "0000";
+            this.widthlimit.SuperTip = "不填代表不限，填了高度按等比例调整。";
+            this.widthlimit.Text = null;
+            this.widthlimit.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.widthlimit_TextChanged);
+            // 
+            // quotes
+            // 
+            ribbonDialogLauncherImpl2.Image = global::PaperWriting.Properties.Resources.icons8_get_quote_48;
+            ribbonDialogLauncherImpl2.ScreenTip = "打开引用窗格";
+            ribbonDialogLauncherImpl2.SuperTip = "该任务窗格可更进一步方便您大量引用的操作。";
+            this.quotes.DialogLauncher = ribbonDialogLauncherImpl2;
+            this.quotes.Items.Add(this.addQuote);
+            this.quotes.Label = "引用";
+            this.quotes.Name = "quotes";
+            this.quotes.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.quotes_DialogLauncherClick);
             // 
             // headers
             // 
@@ -143,18 +166,6 @@
             this.from_clipboard.SuperTip = "您需要先复制一张图片，暂不支持多张。";
             this.from_clipboard.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_figs_ButtonClick);
             // 
-            // widthlimit
-            // 
-            this.widthlimit.Image = global::PaperWriting.Properties.Resources.icons8_调整水平_48;
-            this.widthlimit.Label = "限宽：";
-            this.widthlimit.Name = "widthlimit";
-            this.widthlimit.ScreenTip = "限制插入的图片宽度";
-            this.widthlimit.ShowImage = true;
-            this.widthlimit.SizeString = "0000";
-            this.widthlimit.SuperTip = "不填代表不限，填了高度按等比例调整。";
-            this.widthlimit.Text = null;
-            this.widthlimit.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.widthlimit_TextChanged);
-            // 
             // inmaths
             // 
             this.inmaths.Image = global::PaperWriting.Properties.Resources.icons8_pi_48;
@@ -195,17 +206,6 @@
             this.figlabel.ShowImage = true;
             this.figlabel.SuperTip = "您需要在图片下方使用。";
             this.figlabel.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_label_ButtonClick);
-            // 
-            // quotes
-            // 
-            ribbonDialogLauncherImpl2.Image = global::PaperWriting.Properties.Resources.icons8_get_quote_48;
-            ribbonDialogLauncherImpl2.ScreenTip = "打开引用窗格";
-            ribbonDialogLauncherImpl2.SuperTip = "该任务窗格可更进一步方便您大量引用的操作。";
-            this.quotes.DialogLauncher = ribbonDialogLauncherImpl2;
-            this.quotes.Items.Add(this.addQuote);
-            this.quotes.Label = "引用";
-            this.quotes.Name = "quotes";
-            this.quotes.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.quotes_DialogLauncherClick);
             // 
             // addQuote
             // 

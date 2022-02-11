@@ -86,36 +86,36 @@ namespace PaperWriting.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Title_1 {
+        public string Header1 {
             get {
-                return ((string)(this["Title_1"]));
+                return ((string)(this["Header1"]));
             }
             set {
-                this["Title_1"] = value;
+                this["Header1"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Title_2 {
+        public string Header2 {
             get {
-                return ((string)(this["Title_2"]));
+                return ((string)(this["Header2"]));
             }
             set {
-                this["Title_2"] = value;
+                this["Header2"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Title_3 {
+        public string Header3 {
             get {
-                return ((string)(this["Title_3"]));
+                return ((string)(this["Header3"]));
             }
             set {
-                this["Title_3"] = value;
+                this["Header3"] = value;
             }
         }
         
@@ -133,13 +133,82 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Above")]
-        public global::PaperWriting.TargetPosition TablePosition {
+        [global::System.Configuration.DefaultSettingValueAttribute("公式")]
+        public string FormulaStyle {
             get {
-                return ((global::PaperWriting.TargetPosition)(this["TablePosition"]));
+                return ((string)(this["FormulaStyle"]));
             }
             set {
-                this["TablePosition"] = value;
+                this["FormulaStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("图片")]
+        public string FigureStyle {
+            get {
+                return ((string)(this["FigureStyle"]));
+            }
+            set {
+                this["FigureStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("表格")]
+        public string TableStyle {
+            get {
+                return ((string)(this["TableStyle"]));
+            }
+            set {
+                this["TableStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PaperWriting_")]
+        public string BookmarkPrefix {
+            get {
+                return ((string)(this["BookmarkPrefix"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("标题1")]
+        public string Header1Style {
+            get {
+                return ((string)(this["Header1Style"]));
+            }
+            set {
+                this["Header1Style"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("标题2")]
+        public string Header2Style {
+            get {
+                return ((string)(this["Header2Style"]));
+            }
+            set {
+                this["Header2Style"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("标题3")]
+        public string Header3Style {
+            get {
+                return ((string)(this["Header3Style"]));
+            }
+            set {
+                this["Header3Style"] = value;
             }
         }
     }

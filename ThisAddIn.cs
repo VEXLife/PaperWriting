@@ -28,8 +28,10 @@ namespace PaperWriting
         public About about = new About();
         public CustomTaskPane refTaskPane_pane;
         public RefTaskPane refTaskPane;
-        public Properties.Settings Settings = new Properties.Settings();
+        public Properties.Settings Settings = Properties.Settings.Default;
         public SettingsForm settingsForm = new SettingsForm();
+        private Word.Selection selection;
+        private Word.Document document;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -76,23 +78,17 @@ namespace PaperWriting
             styletable.Table.Condition(Word.WdConditionCode.wdFirstRow).Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
             styletable.Table.Condition(Word.WdConditionCode.wdFirstRow).Borders[Word.WdBorderType.wdBorderBottom].LineWidth = Word.WdLineWidth.wdLineWidth050pt;
             document.UndoClear();
+
+            selection = Application.Selection;
+            this.document = document;
         }
 
-        public void InsertOMath()
+        public void InsertNumberedMath()
         {
             Application.UndoRecord.StartCustomRecord("论文辅助-插入带编号的公式");
-            var selection = Application.Selection;
-            Word.Document document = Application.ActiveDocument;
             selection.TypeParagraph();
-            document.OMaths.Add(selection.Range);
-            selection.TypeText("#(");
-            Word.Range result = document.Fields.Add(selection.Range, Word.WdFieldType.wdFieldEmpty, "SEQ " + SEQs[0], false).Result;
-            selection.TypeText(")");
-            selection.MoveLeft(Unit: Word.WdUnits.wdWord, 3);
-            result.Start--;
-            result.End++;
-            document.Bookmarks.Add(prefixes[0] + bookmarks[0].ToString(), result);
-            bookmarks[0]++;
+            AddinUtility.InsertOMath();
+            AddinUtility.InsertContent(Settings.Formula,Settings.FormulaStyle);
             refTaskPane.RefreshContent();
             Application.UndoRecord.EndCustomRecord();
         }
@@ -107,11 +103,15 @@ namespace PaperWriting
             pickFigure.Title = "插入带编号说明的图片";
             pickFigure.Multiselect = true;
             pickFigure.FilterIndex = 2;
+            var range=selection.Range;
             if (pickFigure.ShowDialog() == DialogResult.OK)
             {
                 foreach (String filename in pickFigure.FileNames)
                 {
-                    InsertFigure(Filename: filename, widthlimit: ref widthlimit);
+                    range.InsertParagraph();
+                    range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
+                    range = AdjustFigure(picture: range.InlineShapes.AddPicture(filename, LinkToFile: false, SaveWithDocument: true),
+                        widthlimit: ref widthlimit);
                 }
             }
             Application.UndoRecord.EndCustomRecord();
@@ -120,65 +120,48 @@ namespace PaperWriting
         public void InsertFigureFromClipboard(ref int widthlimit)
         {
             Application.UndoRecord.StartCustomRecord("论文辅助-从剪贴板插入带编号的图片");
-            var selection = Application.Selection;
-            selection.set_Style(Application.ActiveDocument.Styles["Pictures and Figures"]);
-            var insertedRange = selection.Range;
+            var insertRange = selection.Range;
             selection.Paste();
-            insertedRange.End = selection.End;
+            insertRange.End = selection.End;
 
-            var shapes = insertedRange.InlineShapes;
-            foreach (Word.InlineShape pic in shapes)
+            foreach (Word.InlineShape pic in insertRange.InlineShapes)
             {
-                if (widthlimit > 0)
-                {
-                    float ratio = pic.Height / pic.Width;
-                    pic.Width = widthlimit;
-                    pic.Height = ratio * widthlimit;
-                }
                 var range = pic.Range;
-                range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
-                range.InsertParagraphBefore();
-                range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
-                AddLabel(1, range).InsertParagraph();
+                range.Collapse(Word.WdCollapseDirection.wdCollapseStart);
+                range.InsertParagraph();
+                AdjustFigure(picture: pic, widthlimit: ref widthlimit);
             }
-            selection.Delete();
             Application.UndoRecord.EndCustomRecord();
         }
 
-        public void InsertFigure(String Filename, ref int widthlimit)
+        public Word.Range AdjustFigure(Word.InlineShape picture, ref int widthlimit)
         {
-            Word.Document document = Application.ActiveDocument;
-            var selection = Application.Selection;
-            selection.TypeParagraph();
-            selection.set_Style(document.Styles["Pictures and Figures"]);
-            var pic = selection.InlineShapes.AddPicture(Filename, LinkToFile: false, SaveWithDocument: true);
+            Word.Range range=picture.Range;
             if (widthlimit > 0)
             {
-                float ratio = pic.Height / pic.Width;
-                pic.Width = widthlimit;
-                pic.Height = ratio * widthlimit;
+                float ratio = picture.Height / picture.Width;
+                picture.Width = widthlimit;
+                picture.Height = ratio * widthlimit;
             }
-            selection.TypeParagraph();
-            AddLabel(1, selection.Range);
-        }
-
-        public Word.Range AddLabel(int type, Word.Range range)
-        {
-            Application.UndoRecord.StartCustomRecord("论文辅助-插入描述");
-            Word.Document document = Application.ActiveDocument;
-            range.set_Style(document.Styles["Pictures and Figures"]);
-            range.InsertBefore(descriptions[type]);
-            range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
-            Word.Range result = document.Fields.Add(range, Word.WdFieldType.wdFieldEmpty, "SEQ " + SEQs[type], false).Result;
-            document.Bookmarks.Add(prefixes[type] + bookmarks[type].ToString(), result);
-            result.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
-            result.Move(Count: 1);
-            result.InsertBefore("  ");
-            bookmarks[type]++;
-            refTaskPane.RefreshContent();
-            Application.Selection.SetRange(result.End, result.End);
-            Application.UndoRecord.EndCustomRecord();
-            return document.Range(result.End, result.End);
+            picture.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            if (Settings.FigurePosition == TargetPosition.Below)
+            {
+                range.Collapse(Word.WdCollapseDirection.wdCollapseStart);
+                range.InsertParagraph();
+                range.Collapse(Word.WdCollapseDirection.wdCollapseStart);
+                AddinUtility.InsertContent(Settings.Figure, Settings.FigureStyle, range);
+                range = picture.Range;
+                range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
+            }
+            if (Settings.FigurePosition == TargetPosition.Above)
+            {
+                range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
+                range.InsertParagraph();
+                range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
+                range.End=AddinUtility.InsertContent(Settings.Figure, Settings.FigureStyle, range).End;
+                range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
+            }
+            return range;
         }
 
         public List<QuotePreview> GetQuotePreviews(int imgWidth = 400, int imgHeight = 100)

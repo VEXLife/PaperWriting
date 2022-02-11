@@ -193,6 +193,7 @@
     <Compile Include="About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddinUtility.cs" />
     <Compile Include="Main.cs">
       <SubType>Component</SubType>
     </Compile>

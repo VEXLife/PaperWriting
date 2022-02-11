@@ -12,6 +12,8 @@ namespace PaperWriting
 {
     public partial class RefTaskPane : UserControl
     {
+        private Properties.Settings Settings=Properties.Settings.Default;
+     
         public RefTaskPane()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace PaperWriting
         {
             try
             {
-                hyperref.Checked = Globals.ThisAddIn.Settings.HyperRef;
+                hyperref.Checked = Settings.HyperRef;
                 var previews = Globals.ThisAddIn.GetQuotePreviews();
                 imageList.Images.Clear();
                 QuotableContents.Clear();

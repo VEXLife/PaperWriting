@@ -11,8 +11,9 @@ namespace PaperWriting
 {
     public partial class Main
     {
+        private Properties.Settings Settings = Properties.Settings.Default;
 
-        private void inmaths_Click(object sender, RibbonControlEventArgs e) => Globals.ThisAddIn.InsertOMath();
+        private void inmaths_Click(object sender, RibbonControlEventArgs e) => Globals.ThisAddIn.InsertNumberedMath();
 
         private void insert_figs_ButtonClick(object sender, RibbonControlEventArgs e)
         {
@@ -39,11 +40,11 @@ namespace PaperWriting
         {
             if (((RibbonControl)sender).Id == "figlabel")
             {
-                Globals.ThisAddIn.AddLabel(1, Globals.ThisAddIn.Application.Selection.Range);
+                AddinUtility.InsertContent(Settings.Figure, Settings.FigureStyle);
             }
             else if (((RibbonControl)sender).Id == "tablelabel" || ((RibbonControl)sender).Id == "insert_label")
             {
-                Globals.ThisAddIn.AddLabel(2, Globals.ThisAddIn.Application.Selection.Range);
+                AddinUtility.InsertContent(Settings.Table, Settings.TableStyle);
             }
         }
 
@@ -66,7 +67,7 @@ namespace PaperWriting
         {
             if (widthlimit.Text != "" && !int.TryParse(widthlimit.Text, out _))
                 widthlimit.Text = "";
-            Globals.ThisAddIn.Settings.WidthLimit = widthlimit.Text;
+            Settings.WidthLimit = widthlimit.Text;
         }
 
         private void quotes_DialogLauncherClick(object sender, RibbonControlEventArgs e) => Globals.ThisAddIn.refTaskPane_pane.Visible = !Globals.ThisAddIn.refTaskPane_pane.Visible;
@@ -79,7 +80,7 @@ namespace PaperWriting
 
         private void Main_Load(object sender, RibbonUIEventArgs e)
         {
-            widthlimit.Text = Globals.ThisAddIn.Settings.WidthLimit;
+            widthlimit.Text = Settings.WidthLimit;
         }
 
         private void Insert_DialogLauncherClick(object sender, RibbonControlEventArgs e)
@@ -91,7 +92,19 @@ namespace PaperWriting
 
         private void headers_ButtonClick(object sender, RibbonControlEventArgs e)
         {
-
+            var sender_ = (RibbonButton)sender;
+            switch (sender_.Name)
+            {
+                case "h1":
+                    AddinUtility.InsertContent(Settings.Header1, Settings.Header1Style);
+                    break;
+                case "h2":
+                    AddinUtility.InsertContent(Settings.Header2, Settings.Header2Style);
+                    break;
+                case "h3":
+                    AddinUtility.InsertContent(Settings.Header3, Settings.Header3Style);
+                    break;
+            }
         }
     }
 }
