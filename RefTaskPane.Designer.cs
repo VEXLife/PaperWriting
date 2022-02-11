@@ -40,7 +40,7 @@
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.delete = new System.Windows.Forms.Button();
             this.insert = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.refresh = new System.Windows.Forms.Button();
             this.hyperref = new System.Windows.Forms.CheckBox();
             this.QuotableContents = new System.Windows.Forms.ListView();
             this.contextMenu.SuspendLayout();
@@ -112,6 +112,11 @@
             this.delete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.delete.UseVisualStyleBackColor = true;
+            this.delete.Click += new System.EventHandler(this.delete_Click);
+            this.delete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_MouseDown);
+            this.delete.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.delete.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
+            this.delete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_MouseUp);
             // 
             // insert
             // 
@@ -131,25 +136,35 @@
             this.insert.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.insert.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.insert.UseVisualStyleBackColor = true;
+            this.insert.Click += new System.EventHandler(this.insert_Click);
+            this.insert.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_MouseDown);
+            this.insert.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.insert.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
+            this.insert.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_MouseUp);
             // 
-            // button1
+            // refresh
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(189)))), ((int)(((byte)(227)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(225)))), ((int)(((byte)(242)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::PaperWriting.Properties.Resources.refresh;
-            this.button1.Location = new System.Drawing.Point(129, 467);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(62, 28);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "刷新";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.refresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
+            this.refresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
+            this.refresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(189)))), ((int)(((byte)(227)))));
+            this.refresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(225)))), ((int)(((byte)(242)))));
+            this.refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refresh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.refresh.Image = global::PaperWriting.Properties.Resources.refresh;
+            this.refresh.Location = new System.Drawing.Point(129, 467);
+            this.refresh.Name = "refresh";
+            this.refresh.Size = new System.Drawing.Size(62, 28);
+            this.refresh.TabIndex = 8;
+            this.refresh.Text = "刷新";
+            this.refresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.refresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.refresh.UseVisualStyleBackColor = true;
+            this.refresh.Click += new System.EventHandler(this.refresh_Click);
+            this.refresh.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_MouseDown);
+            this.refresh.MouseEnter += new System.EventHandler(this.btn_MouseEnter);
+            this.refresh.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
+            this.refresh.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_MouseUp);
             // 
             // hyperref
             // 
@@ -192,6 +207,7 @@
             this.QuotableContents.Size = new System.Drawing.Size(320, 447);
             this.QuotableContents.TabIndex = 6;
             this.QuotableContents.UseCompatibleStateImageBehavior = false;
+            this.QuotableContents.DoubleClick += new System.EventHandler(this.QuotableContents_DoubleClick);
             // 
             // RefTaskPane
             // 
@@ -200,7 +216,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.Controls.Add(this.delete);
             this.Controls.Add(this.insert);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.refresh);
             this.Controls.Add(this.hyperref);
             this.Controls.Add(this.QuotableContents);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -225,7 +241,7 @@
         private System.Windows.Forms.ToolStripMenuItem 刷新ToolStripMenuItem;
         private System.Windows.Forms.Button delete;
         private System.Windows.Forms.Button insert;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button refresh;
         private System.Windows.Forms.CheckBox hyperref;
         private System.Windows.Forms.ListView QuotableContents;
     }

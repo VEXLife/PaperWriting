@@ -3,30 +3,33 @@
   <Profiles />
   <Settings>
     <Setting Name="WidthLimit" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">300</Value>
     </Setting>
     <Setting Name="HyperRef" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Formula" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{SEQ 公式}</Value>
+      <Value Profile="(Default)">#\#([{SEQ 一级标题 \c}-{SEQ 公式}])</Value>
     </Setting>
     <Setting Name="Figure" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Figure [{SEQ 图片}]  #</Value>
     </Setting>
     <Setting Name="Table" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Table [{SEQ 表格}]  #</Value>
     </Setting>
     <Setting Name="Header1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">{SEQ 一级标题}  #</Value>
     </Setting>
     <Setting Name="Header2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">{SEQ 一级标题 \c}.{SEQ 二级标题}  #</Value>
     </Setting>
     <Setting Name="Header3" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">{SEQ 一级标题 \c}.{SEQ 二级标题 \c}.{SEQ 三级标题}  #</Value>
     </Setting>
     <Setting Name="FigurePosition" Type="PaperWriting.TargetPosition" Scope="User">
+      <Value Profile="(Default)">Above</Value>
+    </Setting>
+    <Setting Name="TablePosition" Type="PaperWriting.TargetPosition" Scope="User">
       <Value Profile="(Default)">Above</Value>
     </Setting>
     <Setting Name="FormulaStyle" Type="System.String" Scope="User">
@@ -42,13 +45,13 @@
       <Value Profile="(Default)">PaperWriting_</Value>
     </Setting>
     <Setting Name="Header1Style" Type="System.String" Scope="User">
-      <Value Profile="(Default)">标题1</Value>
+      <Value Profile="(Default)">标题 1</Value>
     </Setting>
     <Setting Name="Header2Style" Type="System.String" Scope="User">
-      <Value Profile="(Default)">标题2</Value>
+      <Value Profile="(Default)">标题 2</Value>
     </Setting>
     <Setting Name="Header3Style" Type="System.String" Scope="User">
-      <Value Profile="(Default)">标题3</Value>
+      <Value Profile="(Default)">标题 3</Value>
     </Setting>
   </Settings>
 </SettingsFile>

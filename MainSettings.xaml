@@ -48,6 +48,10 @@
                                 SettingItemValue="{Binding Path=Table,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
                                 SettingItemType="Text"
                                 Margin="30,3" Height="140" />
+            <local:SettingsItem SettingItemName="表格出现在" SettingItemTip=""
+                                SettingItemValue="{Binding Path=TablePosition,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                            SettingItemType="Option" SettingItemOptions="{StaticResource target_pos}"
+                            Margin="30,3" />
             <local:SettingsItem SettingItemName="使用的样式" 
                                 SettingItemValue="{Binding Path=TableStyle,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
                                 SettingItemType="Text"

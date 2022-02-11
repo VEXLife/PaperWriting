@@ -25,7 +25,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
         public string WidthLimit {
             get {
                 return ((string)(this["WidthLimit"]));
@@ -49,7 +49,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{SEQ 公式}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#\\#([{SEQ 一级标题 \\c}-{SEQ 公式}])")]
         public string Formula {
             get {
                 return ((string)(this["Formula"]));
@@ -61,7 +61,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Figure [{SEQ 图片}]  #")]
         public string Figure {
             get {
                 return ((string)(this["Figure"]));
@@ -73,7 +73,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Table [{SEQ 表格}]  #")]
         public string Table {
             get {
                 return ((string)(this["Table"]));
@@ -85,7 +85,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{SEQ 一级标题}  #")]
         public string Header1 {
             get {
                 return ((string)(this["Header1"]));
@@ -97,7 +97,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{SEQ 一级标题 \\c}.{SEQ 二级标题}  #")]
         public string Header2 {
             get {
                 return ((string)(this["Header2"]));
@@ -109,7 +109,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{SEQ 一级标题 \\c}.{SEQ 二级标题 \\c}.{SEQ 三级标题}  #")]
         public string Header3 {
             get {
                 return ((string)(this["Header3"]));
@@ -128,6 +128,18 @@ namespace PaperWriting.Properties {
             }
             set {
                 this["FigurePosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Above")]
+        public global::PaperWriting.TargetPosition TablePosition {
+            get {
+                return ((global::PaperWriting.TargetPosition)(this["TablePosition"]));
+            }
+            set {
+                this["TablePosition"] = value;
             }
         }
         
@@ -178,7 +190,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("标题1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("标题 1")]
         public string Header1Style {
             get {
                 return ((string)(this["Header1Style"]));
@@ -190,7 +202,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("标题2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("标题 2")]
         public string Header2Style {
             get {
                 return ((string)(this["Header2Style"]));
@@ -202,7 +214,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("标题3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("标题 3")]
         public string Header3Style {
             get {
                 return ((string)(this["Header3Style"]));

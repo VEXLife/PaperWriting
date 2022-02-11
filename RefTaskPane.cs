@@ -33,15 +33,16 @@ namespace PaperWriting
                     ListViewItem item = new ListViewItem();
                     item.Text = preview.Text;
                     item.ImageKey = preview.Bookmark.Name;
-                    item.Group = QuotableContents.Groups[Globals.ThisAddIn.CatagorizeBookmark(preview.Bookmark)];
+                    item.Group = QuotableContents.Groups[(int)preview.Group];
                     item.Tag = preview.Bookmark.Name;
+                    item.ToolTipText = "双击即可引用";
                     QuotableContents.Items.Add(item);
                 }
             }
             catch (Exception) { }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void refresh_Click(object sender, EventArgs e)
         {
             RefreshContent();
         }
@@ -112,22 +113,22 @@ namespace PaperWriting
             Globals.ThisAddIn.Settings.HyperRef = hyperref.Checked;
         }
 
-        private void button1_MouseDown(object sender, MouseEventArgs e)
+        private void btn_MouseDown(object sender, MouseEventArgs e)
         {
             ((Button)sender).FlatAppearance.BorderColor = Color.FromArgb(62, 109, 181);
         }
 
-        private void button1_MouseUp(object sender, MouseEventArgs e)
+        private void btn_MouseUp(object sender, MouseEventArgs e)
         {
             ((Button)sender).FlatAppearance.BorderColor = Color.FromArgb(163, 189, 227);
         }
 
-        private void button1_MouseEnter(object sender, EventArgs e)
+        private void btn_MouseEnter(object sender, EventArgs e)
         {
             ((Button)sender).FlatAppearance.BorderColor = Color.FromArgb(163, 189, 227);
         }
 
-        private void button1_MouseLeave(object sender, EventArgs e)
+        private void btn_MouseLeave(object sender, EventArgs e)
         {
             ((Button)sender).FlatAppearance.BorderColor = Color.FromArgb(171,171,171);
         }

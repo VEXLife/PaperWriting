@@ -14,17 +14,15 @@ namespace PaperWriting
 {
     public struct QuotePreview
     {
+        public enum RefGroup { Formula, Figure, Table }
         public string Text { get; set; }
         public Image Image { get; set; }
         public Word.Bookmark Bookmark { get; set; }
+        public RefGroup Group { get; set; }
     }
 
     public partial class ThisAddIn
     {
-        static int[] bookmarks = new int[3];
-        static string[] descriptions = new string[] { "", "Fig.", "Table " };
-        static string[] prefixes = new string[] { "Equation_", "Figure_", "Table_" };
-        static string[] SEQs = new string[] { "公式", "图片", "表格" };
         public About about = new About();
         public CustomTaskPane refTaskPane_pane;
         public RefTaskPane refTaskPane;
@@ -46,28 +44,6 @@ namespace PaperWriting
 
         private void UpdateBookmarkIndex(Word.Document document)
         {
-            while (document.Bookmarks.Exists(prefixes[0] + bookmarks[0].ToString()))
-            {
-                bookmarks[0]++;
-            }
-            while (document.Bookmarks.Exists(prefixes[1] + bookmarks[1].ToString()))
-            {
-                bookmarks[1]++;
-            }
-            while (document.Bookmarks.Exists(prefixes[2] + bookmarks[2].ToString()))
-            {
-                bookmarks[2]++;
-            }
-
-            var styles = document.Styles.Add("Pictures and Figures", Word.WdStyleType.wdStyleTypeParagraph);
-            styles.Font.Size = 12;
-            styles.Font.Name = "Times New Roman";
-            styles.Font.Italic = 1;
-            styles.Font.Bold = 1;
-            styles.Font.Color = Word.WdColor.wdColorBlack;
-            styles.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
-            styles.set_NextParagraphStyle(document.Styles["正文"]);
-
             var styletable = document.Styles.Add("三线表格", Word.WdStyleType.wdStyleTypeTable);
             styletable.set_BaseStyle(document.Styles["普通表格"]);
             var tableself = styletable.Table;
@@ -88,7 +64,7 @@ namespace PaperWriting
             Application.UndoRecord.StartCustomRecord("论文辅助-插入带编号的公式");
             selection.TypeParagraph();
             AddinUtility.InsertOMath();
-            AddinUtility.InsertContent(Settings.Formula,Settings.FormulaStyle);
+            AddinUtility.InsertContent(Settings.Formula, Settings.FormulaStyle);
             refTaskPane.RefreshContent();
             Application.UndoRecord.EndCustomRecord();
         }
@@ -103,7 +79,7 @@ namespace PaperWriting
             pickFigure.Title = "插入带编号说明的图片";
             pickFigure.Multiselect = true;
             pickFigure.FilterIndex = 2;
-            var range=selection.Range;
+            var range = selection.Range;
             if (pickFigure.ShowDialog() == DialogResult.OK)
             {
                 foreach (String filename in pickFigure.FileNames)
@@ -136,7 +112,7 @@ namespace PaperWriting
 
         public Word.Range AdjustFigure(Word.InlineShape picture, ref int widthlimit)
         {
-            Word.Range range=picture.Range;
+            Word.Range range = picture.Range;
             if (widthlimit > 0)
             {
                 float ratio = picture.Height / picture.Width;
@@ -158,7 +134,7 @@ namespace PaperWriting
                 range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
                 range.InsertParagraph();
                 range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
-                range.End=AddinUtility.InsertContent(Settings.Figure, Settings.FigureStyle, range).End;
+                range.End = AddinUtility.InsertContent(Settings.Figure, Settings.FigureStyle, range).End;
                 range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
             }
             return range;
@@ -166,16 +142,15 @@ namespace PaperWriting
 
         public List<QuotePreview> GetQuotePreviews(int imgWidth = 400, int imgHeight = 100)
         {
-            Word.Document document = Application.ActiveDocument;
             List<QuotePreview> previews = new List<QuotePreview>();
-            foreach (Word.Bookmark bookmark in document.Bookmarks)
-            {
-                try
+            if (document != null)
+                foreach (Word.Bookmark bookmark in document.Bookmarks)
                 {
-                    if (bookmark.Name.StartsWith(prefixes[0]))
+                    if (!bookmark.Name.StartsWith(Settings.BookmarkPrefix)) continue;
+                    if (bookmark.Range.OMaths.Count > 0)
                     {
                         QuotePreview preview = new QuotePreview();
-                        preview.Text = "公式" + bookmark.Range.Text;
+                        preview.Text = bookmark.Range.Text;
                         Image enhImage = Image.FromStream(
                             new System.IO.MemoryStream(
                                 (byte[])bookmark.Range.Paragraphs[1].Range.OMaths[1].Range.EnhMetaFileBits
@@ -189,15 +164,23 @@ namespace PaperWriting
                         pen.DrawImage(enhImage, rect, enhImage.Width / 2 - width / 2, 0, width, enhImage.Height, GraphicsUnit.Pixel);
                         preview.Image = bmp;
                         preview.Bookmark = bookmark;
+                        preview.Group = QuotePreview.RefGroup.Formula;
                         previews.Add(preview);
                     }
-                    else if (bookmark.Name.StartsWith(prefixes[1]))
+                    else if ((Settings.FigurePosition == TargetPosition.Below
+                    && bookmark.Range.Paragraphs[1].Next() != null
+                    && bookmark.Range.Paragraphs[1].Next().Range.InlineShapes.Count > 0) ||
+                    (Settings.FigurePosition == TargetPosition.Above
+                    && bookmark.Range.Paragraphs[1].Previous() != null
+                    && bookmark.Range.Paragraphs[1].Previous().Range.InlineShapes.Count > 0))
                     {
                         QuotePreview preview = new QuotePreview();
                         preview.Text = bookmark.Range.Paragraphs[1].Range.Text;
                         Image enhImage = Image.FromStream(
                             new System.IO.MemoryStream(
-                                (byte[])bookmark.Range.Paragraphs[1].Previous().Range.InlineShapes[1].Range.EnhMetaFileBits
+                                (byte[])(Settings.FigurePosition == TargetPosition.Below ?
+                                bookmark.Range.Paragraphs[1].Next().Range.InlineShapes[1].Range.EnhMetaFileBits :
+                                bookmark.Range.Paragraphs[1].Previous().Range.InlineShapes[1].Range.EnhMetaFileBits)
                             )
                         );
                         Bitmap bmp = new Bitmap(imgWidth, imgHeight);
@@ -207,13 +190,20 @@ namespace PaperWriting
                         preview.Bookmark = bookmark;
                         previews.Add(preview);
                     }
-                    else if (bookmark.Name.StartsWith(prefixes[2]))
+                    else if ((Settings.TablePosition == TargetPosition.Below
+                    && bookmark.Range.Paragraphs[1].Next() != null
+                    && bookmark.Range.Paragraphs[1].Next().Range.Tables.Count > 0) ||
+                    (Settings.TablePosition == TargetPosition.Above
+                    && bookmark.Range.Paragraphs[1].Previous() != null
+                    && bookmark.Range.Paragraphs[1].Previous().Range.Tables.Count > 0))
                     {
                         QuotePreview preview = new QuotePreview();
                         preview.Text = bookmark.Range.Paragraphs[1].Range.Text;
                         Image enhImage = Image.FromStream(
                             new System.IO.MemoryStream(
-                                (byte[])bookmark.Range.Paragraphs[1].Next().Range.Tables[1].Range.EnhMetaFileBits
+                                (byte[])(Settings.TablePosition == TargetPosition.Below ?
+                                bookmark.Range.Paragraphs[1].Next().Range.Tables[1].Range.EnhMetaFileBits :
+                                bookmark.Range.Paragraphs[1].Previous().Range.Tables[1].Range.EnhMetaFileBits)
                             )
                         );
                         Bitmap bmp = new Bitmap(imgWidth, imgHeight);
@@ -224,8 +214,6 @@ namespace PaperWriting
                         previews.Add(preview);
                     }
                 }
-                catch (Exception) { }
-            }
             return previews;
         }
 
@@ -235,21 +223,6 @@ namespace PaperWriting
             var selection = Application.Selection;
             selection.InsertCrossReference("书签", Word.WdReferenceKind.wdContentText, bookmarkName, hyperref);
             Application.UndoRecord.EndCustomRecord();
-        }
-
-        public string CatagotizeBookmark(string bookmarkName)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                if (bookmarkName.StartsWith(prefixes[i]))
-                    return SEQs[i];
-            }
-            return "未知类别";
-        }
-
-        public string CatagorizeBookmark(Word.Bookmark bookmarkName)
-        {
-            return CatagotizeBookmark(bookmarkName.Name);
         }
 
         public void RemoveBookmark(string bookmarkName)
