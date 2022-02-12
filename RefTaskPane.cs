@@ -24,7 +24,7 @@ namespace PaperWriting
             try
             {
                 hyperref.Checked = Settings.HyperRef;
-                var previews = Globals.ThisAddIn.GetQuotePreviews();
+                var previews = Globals.ThisAddIn.ReferencePreviews();
                 imageList.Images.Clear();
                 QuotableContents.Clear();
                 foreach (var preview in previews)

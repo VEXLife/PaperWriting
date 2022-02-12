@@ -38,8 +38,6 @@
             Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl2 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.Insert = this.Factory.CreateRibbonGroup();
-            this.widthlimit = this.Factory.CreateRibbonEditBox();
-            this.quotes = this.Factory.CreateRibbonGroup();
             this.headers = this.Factory.CreateRibbonGallery();
             this.h1 = this.Factory.CreateRibbonButton();
             this.h2 = this.Factory.CreateRibbonButton();
@@ -47,10 +45,12 @@
             this.insert_figs = this.Factory.CreateRibbonSplitButton();
             this.from_file = this.Factory.CreateRibbonButton();
             this.from_clipboard = this.Factory.CreateRibbonButton();
+            this.widthlimit = this.Factory.CreateRibbonEditBox();
             this.inmaths = this.Factory.CreateRibbonButton();
             this.insert_label = this.Factory.CreateRibbonSplitButton();
             this.tablelabel = this.Factory.CreateRibbonButton();
             this.figlabel = this.Factory.CreateRibbonButton();
+            this.quotes = this.Factory.CreateRibbonGroup();
             this.addQuote = this.Factory.CreateRibbonGallery();
             this.show_refTaskPane = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
@@ -78,29 +78,6 @@
             this.Insert.Name = "Insert";
             this.Insert.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Insert_DialogLauncherClick);
             // 
-            // widthlimit
-            // 
-            this.widthlimit.Image = global::PaperWriting.Properties.Resources.icons8_调整水平_48;
-            this.widthlimit.Label = "限宽：";
-            this.widthlimit.Name = "widthlimit";
-            this.widthlimit.ScreenTip = "限制插入的图片宽度";
-            this.widthlimit.ShowImage = true;
-            this.widthlimit.SizeString = "0000";
-            this.widthlimit.SuperTip = "不填代表不限，填了高度按等比例调整。";
-            this.widthlimit.Text = null;
-            this.widthlimit.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.widthlimit_TextChanged);
-            // 
-            // quotes
-            // 
-            ribbonDialogLauncherImpl2.Image = global::PaperWriting.Properties.Resources.icons8_get_quote_48;
-            ribbonDialogLauncherImpl2.ScreenTip = "打开引用窗格";
-            ribbonDialogLauncherImpl2.SuperTip = "该任务窗格可更进一步方便您大量引用的操作。";
-            this.quotes.DialogLauncher = ribbonDialogLauncherImpl2;
-            this.quotes.Items.Add(this.addQuote);
-            this.quotes.Label = "引用";
-            this.quotes.Name = "quotes";
-            this.quotes.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.quotes_DialogLauncherClick);
-            // 
             // headers
             // 
             this.headers.Buttons.Add(this.h1);
@@ -110,7 +87,9 @@
             this.headers.Image = global::PaperWriting.Properties.Resources.icons8_header_1_40;
             this.headers.Label = "添加标题";
             this.headers.Name = "headers";
+            this.headers.ScreenTip = "插入一个标题";
             this.headers.ShowImage = true;
+            this.headers.SuperTip = "可提供自动输入所设置的标题部分内容的功能。";
             this.headers.ButtonClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.headers_ButtonClick);
             // 
             // h1
@@ -119,6 +98,7 @@
             this.h1.Label = "一级标题";
             this.h1.Name = "h1";
             this.h1.ShowImage = true;
+            this.h1.SuperTip = "一般是最主要的标题层次。";
             // 
             // h2
             // 
@@ -126,6 +106,7 @@
             this.h2.Label = "二级标题";
             this.h2.Name = "h2";
             this.h2.ShowImage = true;
+            this.h2.SuperTip = "一般是次级标题，如小节等。";
             // 
             // h3
             // 
@@ -133,6 +114,7 @@
             this.h3.Label = "三级标题";
             this.h3.Name = "h3";
             this.h3.ShowImage = true;
+            this.h3.SuperTip = "一般是最小的标题层次，如方法或例子等。";
             // 
             // insert_figs
             // 
@@ -143,7 +125,7 @@
             this.insert_figs.Label = "带编号图片";
             this.insert_figs.Name = "insert_figs";
             this.insert_figs.ScreenTip = "插入带编号的图片";
-            this.insert_figs.SuperTip = "插入图片后将自动添加图片描述和编号，并应用“图和表格”样式。直接点击为“来自文件”。";
+            this.insert_figs.SuperTip = "插入图片后将自动添加图片描述，并应用所设置的图片样式。直接点击为“来自文件”。";
             this.insert_figs.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_figs_ButtonClick);
             // 
             // from_file
@@ -166,6 +148,18 @@
             this.from_clipboard.SuperTip = "您需要先复制一张图片，暂不支持多张。";
             this.from_clipboard.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_figs_ButtonClick);
             // 
+            // widthlimit
+            // 
+            this.widthlimit.Image = global::PaperWriting.Properties.Resources.icons8_调整水平_48;
+            this.widthlimit.Label = "限宽：";
+            this.widthlimit.Name = "widthlimit";
+            this.widthlimit.ScreenTip = "限制插入的图片宽度";
+            this.widthlimit.ShowImage = true;
+            this.widthlimit.SizeString = "0000";
+            this.widthlimit.SuperTip = "不填代表不限，填了高度按等比例调整。";
+            this.widthlimit.Text = null;
+            this.widthlimit.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.widthlimit_TextChanged);
+            // 
             // inmaths
             // 
             this.inmaths.Image = global::PaperWriting.Properties.Resources.icons8_pi_48;
@@ -173,7 +167,7 @@
             this.inmaths.Name = "inmaths";
             this.inmaths.ScreenTip = "插入带编号的公式";
             this.inmaths.ShowImage = true;
-            this.inmaths.SuperTip = "可提供自动输入#(编号)的功能。";
+            this.inmaths.SuperTip = "可提供自动输入所设置的公式部分内容的功能。";
             this.inmaths.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.inmaths_Click);
             // 
             // insert_label
@@ -184,7 +178,7 @@
             this.insert_label.Label = "添加描述";
             this.insert_label.Name = "insert_label";
             this.insert_label.ScreenTip = "添加描述文本";
-            this.insert_label.SuperTip = "描述文本将以样式“图和表格”应用并呈现。直接点击为表格描述。";
+            this.insert_label.SuperTip = "描述文本将以所设置的样式应用并呈现。直接点击为表格描述。";
             this.insert_label.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_label_ButtonClick);
             // 
             // tablelabel
@@ -194,7 +188,7 @@
             this.tablelabel.Name = "tablelabel";
             this.tablelabel.ScreenTip = "添加表格描述";
             this.tablelabel.ShowImage = true;
-            this.tablelabel.SuperTip = "您需要在目标表格上方使用。";
+            this.tablelabel.SuperTip = "您需要在目标表格上方或下方使用，取决于您设置的结果。";
             this.tablelabel.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_label_ButtonClick);
             // 
             // figlabel
@@ -204,8 +198,19 @@
             this.figlabel.Name = "figlabel";
             this.figlabel.ScreenTip = "添加图片描述";
             this.figlabel.ShowImage = true;
-            this.figlabel.SuperTip = "您需要在图片下方使用。";
+            this.figlabel.SuperTip = "您需要在目标图片上方或下方使用，取决于您设置的结果。";
             this.figlabel.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_label_ButtonClick);
+            // 
+            // quotes
+            // 
+            ribbonDialogLauncherImpl2.Image = global::PaperWriting.Properties.Resources.icons8_get_quote_48;
+            ribbonDialogLauncherImpl2.ScreenTip = "打开引用窗格";
+            ribbonDialogLauncherImpl2.SuperTip = "该任务窗格可更进一步方便您大量引用的操作。";
+            this.quotes.DialogLauncher = ribbonDialogLauncherImpl2;
+            this.quotes.Items.Add(this.addQuote);
+            this.quotes.Label = "引用";
+            this.quotes.Name = "quotes";
+            this.quotes.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.quotes_DialogLauncherClick);
             // 
             // addQuote
             // 

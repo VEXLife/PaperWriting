@@ -226,6 +226,7 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="LICENSE" />
     <None Include="PaperWriting_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -310,6 +311,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-header-3-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -63,6 +63,7 @@ namespace PaperWriting
                 range.Collapse(WdCollapseDirection.wdCollapseEnd);
             }
             document.Bookmarks.Add(GenerateBookmarkName(), bookmarkRange);
+            Globals.ThisAddIn.refTaskPane.RefreshContent();
             undoRecord.EndCustomRecord();
             return range;
         }

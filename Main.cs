@@ -51,7 +51,7 @@ namespace PaperWriting
         private void addQuote_ItemsLoading(object sender, RibbonControlEventArgs e)
         {
             addQuote.Items.Clear();
-            foreach (var quoteItem in Globals.ThisAddIn.GetQuotePreviews())
+            foreach (var quoteItem in Globals.ThisAddIn.ReferencePreviews())
             {
                 RibbonDropDownItem item = this.Factory.CreateRibbonDropDownItem();
                 item.Label = quoteItem.Text;

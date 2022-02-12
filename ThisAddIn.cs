@@ -65,7 +65,6 @@ namespace PaperWriting
             selection.TypeParagraph();
             AddinUtility.InsertOMath();
             AddinUtility.InsertContent(Settings.Formula, Settings.FormulaStyle);
-            refTaskPane.RefreshContent();
             Application.UndoRecord.EndCustomRecord();
         }
 
@@ -140,7 +139,7 @@ namespace PaperWriting
             return range;
         }
 
-        public List<QuotePreview> GetQuotePreviews(int imgWidth = 400, int imgHeight = 100)
+        public List<QuotePreview> ReferencePreviews(int imgWidth = 400, int imgHeight = 100)
         {
             List<QuotePreview> previews = new List<QuotePreview>();
             if (document != null)
@@ -188,6 +187,7 @@ namespace PaperWriting
                         pen.DrawImage(enhImage, 0, 0);
                         preview.Image = bmp;
                         preview.Bookmark = bookmark;
+                        preview.Group = QuotePreview.RefGroup.Figure;
                         previews.Add(preview);
                     }
                     else if ((Settings.TablePosition == TargetPosition.Below
@@ -211,6 +211,7 @@ namespace PaperWriting
                         pen.DrawImage(enhImage, 0, 0);
                         preview.Image = bmp;
                         preview.Bookmark = bookmark;
+                        preview.Group = QuotePreview.RefGroup.Table;
                         previews.Add(preview);
                     }
                 }
