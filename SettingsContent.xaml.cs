@@ -18,7 +18,7 @@ namespace PaperWriting
         {
             {"settings", new MainSettings() },
             {"info", new About() }
-        };
+        }; // 页面切换的内容字典
 
         public SettingsContent()
         {
@@ -33,6 +33,7 @@ namespace PaperWriting
 
         private void NavBar_Selected(object sender, RoutedEventArgs e)
         {
+            // 实现导航栏长方形移动的动画
             var senderControl = sender as ListBoxItem;
             animation.To = senderControl.TranslatePoint(originalPoint, nav_btn_container).Y;
             animation.Duration = TimeSpan.FromSeconds(0.15);

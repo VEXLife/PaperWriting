@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PaperWriting
@@ -19,12 +13,15 @@ namespace PaperWriting
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 刷新。
+        /// </summary>
         public void RefreshContent()
         {
             try
             {
                 hyperref.Checked = Settings.HyperRef;
-                var previews = Globals.ThisAddIn.ReferencePreviews();
+                var previews = Globals.ThisAddIn.GetReferencePreviews();
                 imageList.Images.Clear();
                 QuotableContents.Clear();
                 foreach (var preview in previews)
@@ -66,6 +63,9 @@ namespace PaperWriting
             }
         }
 
+        /// <summary>
+        /// 删除所选。
+        /// </summary>
         private void delete_selected()
         {
             foreach (var selectedItem in QuotableContents.SelectedItems)

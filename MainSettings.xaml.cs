@@ -6,7 +6,7 @@ namespace PaperWriting
 {
 
     /// <summary>
-    /// MainSettings.xaml 的交互逻辑
+    /// MainSettings.xaml 的交互逻辑。
     /// </summary>
     public partial class MainSettings : Page
     {
@@ -21,6 +21,9 @@ namespace PaperWriting
         }
     }
 
+    /// <summary>
+    /// 下拉菜单项。
+    /// </summary>
     class TargetPositionComboBoxItems : ObservableCollection<string>
     {
         public TargetPositionComboBoxItems()
@@ -30,6 +33,9 @@ namespace PaperWriting
         }
     }
 
+    /// <summary>
+    /// 描述插入方位的枚举。
+    /// </summary>
     [Serializable]
     public enum TargetPosition
     {

@@ -8,6 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <!-- 按钮样式 -->
         <Style x:Key="tb_style" TargetType="{x:Type ContentControl}">
             <Setter Property="Height" Value="40" />
             <Setter Property="Template">
@@ -43,6 +44,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- 字体样式 -->
         <Style x:Key="tb_label" TargetType="Label">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Margin" Value="0,0,30,0" />
@@ -51,6 +53,8 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
+        
+        <!-- 展开/收起侧边栏的动画 -->
         <Storyboard x:Key="HideStackPanel">
             <DoubleAnimation Storyboard.TargetName="nav_pnl" 
                                                      Storyboard.TargetProperty="Width" 
@@ -69,6 +73,7 @@
         <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" Margin="60,0,0,0" />
         <Grid Background="#028944" x:Name="nav_pnl" Width="60" HorizontalAlignment="Left">
             <StackPanel>
+                <!-- #region 菜单按钮 -->
                 <ToggleButton x:Name="menu_btn"
                               Height="40"
                               Margin="0,20,0,30"
@@ -93,6 +98,9 @@
                         </EventTrigger>
                     </ToggleButton.Triggers>
                 </ToggleButton>
+                <!-- #endregion -->
+                
+                <!-- #region 页面切换按钮 -->
                 <ListBox BorderThickness="0" Background="Transparent" Foreground="#fdfefd" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Name="nav_btn_container">
                     <ListBox.ItemContainerStyle>
                         <Style BasedOn="{StaticResource tb_style}" TargetType="ListBoxItem">
@@ -123,7 +131,10 @@
                         </Grid>
                     </ListBoxItem>
                 </ListBox>
+                <!-- #endregion -->
             </StackPanel>
+            
+            <!-- 指示当前页面的长方体 -->
             <Canvas>
                 <Rectangle Width="2" Height="40" Fill="#fefdfe" HorizontalAlignment="Left" Margin="0,90,0,0">
                     <Rectangle.RenderTransform>

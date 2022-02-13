@@ -1,11 +1,5 @@
-﻿using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Word;
-using Microsoft.Office.Tools.Ribbon;
+﻿using Microsoft.Office.Tools.Ribbon;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Word = Microsoft.Office.Interop.Word;
 
 namespace PaperWriting
 {
@@ -51,7 +45,7 @@ namespace PaperWriting
         private void addQuote_ItemsLoading(object sender, RibbonControlEventArgs e)
         {
             addQuote.Items.Clear();
-            foreach (var quoteItem in Globals.ThisAddIn.ReferencePreviews())
+            foreach (var quoteItem in Globals.ThisAddIn.GetReferencePreviews())
             {
                 RibbonDropDownItem item = this.Factory.CreateRibbonDropDownItem();
                 item.Label = quoteItem.Text;
