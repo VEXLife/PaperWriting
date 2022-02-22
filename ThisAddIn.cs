@@ -48,7 +48,21 @@ namespace PaperWriting
             selection = Application.Selection;
             try
             {
-                this.activeDocument = Application.ActiveDocument;
+                activeDocument = Application.ActiveDocument;
+
+                if (Settings.AddTableStyle)
+                { // 三线表格样式
+                    var styletable = activeDocument.Styles.Add("三线表格", Word.WdStyleType.wdStyleTypeTable);
+                    styletable.set_BaseStyle(activeDocument.Styles["普通表格"]);
+                    var tableself = styletable.Table;
+                    tableself.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    tableself.Borders[Word.WdBorderType.wdBorderTop].LineWidth = Word.WdLineWidth.wdLineWidth150pt;
+                    tableself.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    tableself.Borders[Word.WdBorderType.wdBorderBottom].LineWidth = Word.WdLineWidth.wdLineWidth150pt;
+                    styletable.Table.Condition(Word.WdConditionCode.wdFirstRow).Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    styletable.Table.Condition(Word.WdConditionCode.wdFirstRow).Borders[Word.WdBorderType.wdBorderBottom].LineWidth = Word.WdLineWidth.wdLineWidth050pt;
+                    activeDocument.UndoClear();
+                }
             }
             catch (COMException) { } // 使用try...catch的原因是有可能没有活动的文档
         }
@@ -61,7 +75,7 @@ namespace PaperWriting
         public void InsertNumberedMath()
         {
             Application.UndoRecord.StartCustomRecord("论文辅助-插入带编号的公式");
-            selection.TypeParagraph();
+            if (Settings.InsertToAnotherParagraph) selection.TypeParagraph();
             AddinUtility.InsertOMath();
             AddinUtility.InsertContent(Settings.Formula, Settings.FormulaStyle);
             Application.UndoRecord.EndCustomRecord();
@@ -86,12 +100,14 @@ namespace PaperWriting
             var range = selection.Range;
             if (pickFigure.ShowDialog() == DialogResult.OK)
             {
+                bool isFirstOne = true;
                 foreach (String filename in pickFigure.FileNames)
                 {
-                    range.InsertParagraph();
+                    if (!isFirstOne || Settings.InsertToAnotherParagraph) range.InsertParagraph();
                     range.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
                     range = AdjustFigure(picture: range.InlineShapes.AddPicture(filename, LinkToFile: false, SaveWithDocument: true),
                         widthlimit: ref widthlimit);
+                    isFirstOne = false;
                 }
             }
             Application.UndoRecord.EndCustomRecord();
@@ -108,12 +124,14 @@ namespace PaperWriting
             selection.Paste();
             insertRange.End = selection.End;
 
+            bool isFirstOne = true;
             foreach (Word.InlineShape pic in insertRange.InlineShapes)
             {
                 var range = pic.Range;
                 range.Collapse(Word.WdCollapseDirection.wdCollapseStart);
-                range.InsertParagraph();
+                if (!isFirstOne || Settings.InsertToAnotherParagraph) range.InsertParagraph();
                 AdjustFigure(picture: pic, widthlimit: ref widthlimit);
+                isFirstOne = false;
             }
             Application.UndoRecord.EndCustomRecord();
         }
@@ -127,7 +145,7 @@ namespace PaperWriting
         public Word.Range AdjustFigure(Word.InlineShape picture, ref int widthlimit)
         {
             Word.Range range = picture.Range;
-            
+
             // 调整大小
             if (widthlimit > 0)
             {
@@ -135,7 +153,11 @@ namespace PaperWriting
                 picture.Width = widthlimit;
                 picture.Height = ratio * widthlimit;
             }
-            picture.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter; // 居中
+            try
+            {
+                picture.Range.set_Style(Settings.FigureStyle);
+            }
+            catch (Exception) { }
 
             // 根据设置插入描述
             if (Settings.FigurePosition == TargetPosition.Below)

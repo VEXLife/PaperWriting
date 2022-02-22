@@ -56,6 +56,10 @@
                                 SettingItemValue="{Binding Path=TableStyle,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
                                 SettingItemType="Text"
                                 Margin="30,3" />
+            <local:SettingsItem SettingItemName="向打开的文档中添加三线表格样式" 
+                                SettingItemValue="{Binding Path=AddTableStyle,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Check"
+                                Margin="30,3" />
             <Label HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource title}">标题</Label>
             <local:SettingsItem SettingItemName="一级标题内容" SettingItemTip="使用{}包裹域代码，转义符号\{和\}表示普通的花括弧；#表示光标所处位置，\#表示普通的井号。" 
                                 SettingItemValue="{Binding Path=Header1,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
@@ -80,6 +84,11 @@
             <local:SettingsItem SettingItemName="三级标题样式" 
                                 SettingItemValue="{Binding Path=Header3Style,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
                                 SettingItemType="Text"
+                                Margin="30,3" />
+            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource title}">杂项</Label>
+            <local:SettingsItem SettingItemName="总是另起一段插入内容" 
+                                SettingItemValue="{Binding Path=InsertToAnotherParagraph,Source={x:Static prop:Settings.Default},Mode=TwoWay}"
+                                SettingItemType="Check"
                                 Margin="30,3" />
         </StackPanel>
     </ScrollViewer>

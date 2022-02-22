@@ -49,7 +49,7 @@ namespace PaperWriting.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#\\#([{SEQ 一级标题 \\c}-{SEQ 公式}])")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#\\#([{SEQ 公式}])")]
         public string Formula {
             get {
                 return ((string)(this["Formula"]));
@@ -221,6 +221,30 @@ namespace PaperWriting.Properties {
             }
             set {
                 this["Header3Style"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool InsertToAnotherParagraph {
+            get {
+                return ((bool)(this["InsertToAnotherParagraph"]));
+            }
+            set {
+                this["InsertToAnotherParagraph"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AddTableStyle {
+            get {
+                return ((bool)(this["AddTableStyle"]));
+            }
+            set {
+                this["AddTableStyle"] = value;
             }
         }
     }

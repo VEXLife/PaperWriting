@@ -9,7 +9,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Formula" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#\#([{SEQ 一级标题 \c}-{SEQ 公式}])</Value>
+      <Value Profile="(Default)">#\#([{SEQ 公式}])</Value>
     </Setting>
     <Setting Name="Figure" Type="System.String" Scope="User">
       <Value Profile="(Default)">Figure [{SEQ 图片}]  #</Value>
@@ -52,6 +52,12 @@
     </Setting>
     <Setting Name="Header3Style" Type="System.String" Scope="User">
       <Value Profile="(Default)">标题 3</Value>
+    </Setting>
+    <Setting Name="InsertToAnotherParagraph" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AddTableStyle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -20,14 +20,10 @@ namespace PaperWriting
             this.versionLabel.Text = version_text.ToString();
         }
 
-        private void To_Icons8(object sender, System.Windows.RoutedEventArgs e)
+        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            Process.Start("https://icons8.com");
-        }
-
-        private void To_Feathers(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Process.Start("https://feathersicon.com");
+            Process.Start(e.Uri.ToString());
+            e.Handled = true;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace PaperWriting
 
     public enum SettingItemTypeEnum
     {
-        RichText, Text, Option
+        RichText, Text, Option, Check
     }
 
     public class SettingItemSelector : DataTemplateSelector
@@ -45,6 +45,7 @@ namespace PaperWriting
         public DataTemplate RichTextTmpl { get; set; }
         public DataTemplate TextTmpl { get; set; }
         public DataTemplate OptionTmpl { get; set; }
+        public DataTemplate CheckTmpl { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -57,6 +58,8 @@ namespace PaperWriting
                     return TextTmpl;
                 case SettingItemTypeEnum.Option:
                     return OptionTmpl;
+                case SettingItemTypeEnum.Check:
+                    return CheckTmpl;
                 default:
                     return base.SelectTemplate(item, container);
             }

@@ -23,7 +23,15 @@
                   ItemsSource="{Binding Path=SettingItemOptions,ElementName=this}"
                   SelectedValue="{Binding Path=SettingItemValue,Mode=TwoWay,ElementName=this,Converter={StaticResource content_converter}}" />
         </DataTemplate>
-        <local:SettingItemSelector x:Key="selector" TextTmpl="{StaticResource text_tmpl}" RichTextTmpl="{StaticResource richtext_tmpl}" OptionTmpl="{StaticResource option_tmpl}" />
+        <DataTemplate x:Key="check_tmpl">
+            <CheckBox Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center"
+                  IsChecked="{Binding Path=SettingItemValue,Mode=TwoWay,ElementName=this}" />
+        </DataTemplate>
+        <local:SettingItemSelector x:Key="selector" 
+                                   TextTmpl="{StaticResource text_tmpl}" 
+                                   RichTextTmpl="{StaticResource richtext_tmpl}" 
+                                   OptionTmpl="{StaticResource option_tmpl}" 
+                                   CheckTmpl="{StaticResource check_tmpl}"/>
     </UserControl.Resources>
     
     <Grid>

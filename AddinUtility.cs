@@ -9,9 +9,9 @@ namespace PaperWriting
     {
         private const string bracketRegex = @"((?<!\\)\{.*?(?<!\\)\}|(?<!\\)[\[\]]|(?<!\\)#)"; // 用于匹配可识别的功能字符的正则表达式
 
-        private static Selection selection = Globals.ThisAddIn.Application.Selection;
-        private static Document document = Globals.ThisAddIn.Application.ActiveDocument;
-        private static UndoRecord undoRecord = Globals.ThisAddIn.Application.UndoRecord;
+        private static Selection selection { get { return Globals.ThisAddIn.Application.Selection; } }
+        private static Document document { get { return Globals.ThisAddIn.Application.ActiveDocument; } }
+        private static UndoRecord undoRecord { get { return Globals.ThisAddIn.Application.UndoRecord; } }
 
         /// <summary>
         /// 插入公式。参见<seealso cref="InsertContent(string, string, Range)"/>
@@ -43,15 +43,16 @@ namespace PaperWriting
         /// <param name="style">要设置的样式</param>
         /// <param name="range">插入的位置</param>
         /// <returns>插入后最后的字符位置</returns>
-        public static Range InsertContent(string content, string style=null, Range range = null)
+        public static Range InsertContent(string content, string style = null, Range range = null)
         {
-            undoRecord.StartCustomRecord("论文辅助-插入描述");
+            undoRecord.StartCustomRecord("论文辅助-插入文本");
 
             if (range == null) range = selection.Range;
             try
             {
                 range.set_Style(style);
-            }catch (System.Runtime.InteropServices.COMException) { }
+            }
+            catch (System.Runtime.InteropServices.COMException) { }
             Range bookmarkRange = document.Range();
 
             var contentTextArray = Regex.Split(content, bracketRegex);
@@ -64,7 +65,7 @@ namespace PaperWriting
                      * 存在一个问题：Word插入域代码后返回的范围是考虑域代码的长度的，而切换域代码后这个范围就不对了。
                      * 目前的解决方案是把原本的范围右移返回的范围长度，得到插入域后的位置。
                      */
-                    var fieldRange=InsertField(contentText.Substring(1, contentText.Length - 2), range);
+                    var fieldRange = InsertField(contentText.Substring(1, contentText.Length - 2), range);
                     range.Move(Count: fieldRange.End - fieldRange.Start);
                     continue;
                 }
@@ -80,10 +81,10 @@ namespace PaperWriting
                 }
                 if (contentText == "#")
                 {
-                    selection.SetRange(range.Start,range.Start);
+                    selection.SetRange(range.Start, range.Start);
                     continue;
                 }
-                range.InsertAfter(contentText.Replace(@"\#","#").Replace(@"\{","{").Replace(@"\}","}").Replace(@"\[","[").Replace(@"\]","]")); // 插入纯文本内容，还原转义字符
+                range.InsertAfter(contentText.Replace(@"\#", "#").Replace(@"\{", "{").Replace(@"\}", "}").Replace(@"\[", "[").Replace(@"\]", "]")); // 插入纯文本内容，还原转义字符
                 range.Collapse(WdCollapseDirection.wdCollapseEnd);
             }
             document.Bookmarks.Add(GenerateBookmarkName(), bookmarkRange);

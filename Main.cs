@@ -86,6 +86,8 @@ namespace PaperWriting
 
         private void headers_ButtonClick(object sender, RibbonControlEventArgs e)
         {
+            if (Settings.InsertToAnotherParagraph) Globals.ThisAddIn.Application.Selection.TypeParagraph();
+
             var sender_ = (RibbonButton)sender;
             switch (sender_.Name)
             {
@@ -99,6 +101,12 @@ namespace PaperWriting
                     AddinUtility.InsertContent(Settings.Header3, Settings.Header3Style);
                     break;
             }
+        }
+
+        private void makequotable_Click(object sender, RibbonControlEventArgs e)
+        {
+            Globals.ThisAddIn.Application.ActiveDocument.Bookmarks.Add(AddinUtility.GenerateBookmarkName(), Globals.ThisAddIn.Application.Selection);
+            Globals.ThisAddIn.refTaskPane.RefreshContent();
         }
     }
 }

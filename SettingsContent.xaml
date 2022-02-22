@@ -56,16 +56,24 @@
         
         <!-- 展开/收起侧边栏的动画 -->
         <Storyboard x:Key="HideStackPanel">
-            <DoubleAnimation Storyboard.TargetName="nav_pnl" 
-                                                     Storyboard.TargetProperty="Width" 
-                                                     BeginTime="0:0:0" Duration="0:0:0.2"
-                                                     To="60"></DoubleAnimation>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="nav_pnl" 
+                                                     Storyboard.TargetProperty="Width">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="60">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="ShowStackPanel">
-            <DoubleAnimation Storyboard.TargetName="nav_pnl" 
-                                                     Storyboard.TargetProperty="Width" 
-                                                     BeginTime="0:0:0" Duration="0:0:0.2"
-                                                     To="190"></DoubleAnimation>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="nav_pnl" 
+                                                     Storyboard.TargetProperty="Width">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="190">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
 

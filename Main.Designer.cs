@@ -50,6 +50,7 @@
             this.insert_label = this.Factory.CreateRibbonSplitButton();
             this.tablelabel = this.Factory.CreateRibbonButton();
             this.figlabel = this.Factory.CreateRibbonButton();
+            this.makequotable = this.Factory.CreateRibbonButton();
             this.quotes = this.Factory.CreateRibbonGroup();
             this.addQuote = this.Factory.CreateRibbonGallery();
             this.show_refTaskPane = this.Factory.CreateRibbonButton();
@@ -68,12 +69,15 @@
             // 
             // Insert
             // 
+            ribbonDialogLauncherImpl1.ScreenTip = "打开加载项设置";
+            ribbonDialogLauncherImpl1.SuperTip = "调整加载项快捷插入内容时的行为。加载项设置中还包括一个“关于”页面。";
             this.Insert.DialogLauncher = ribbonDialogLauncherImpl1;
             this.Insert.Items.Add(this.headers);
             this.Insert.Items.Add(this.insert_figs);
             this.Insert.Items.Add(this.widthlimit);
             this.Insert.Items.Add(this.inmaths);
             this.Insert.Items.Add(this.insert_label);
+            this.Insert.Items.Add(this.makequotable);
             this.Insert.Label = "论文插入";
             this.Insert.Name = "Insert";
             this.Insert.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Insert_DialogLauncherClick);
@@ -201,6 +205,17 @@
             this.figlabel.SuperTip = "您需要在目标图片上方或下方使用，取决于您设置的结果。";
             this.figlabel.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.insert_label_ButtonClick);
             // 
+            // makequotable
+            // 
+            this.makequotable.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.makequotable.Image = global::PaperWriting.Properties.Resources.icons8_bookmark_48;
+            this.makequotable.Label = "标记为可引用";
+            this.makequotable.Name = "makequotable";
+            this.makequotable.ScreenTip = "将选中内容标记为将在引用窗格中出现的内容";
+            this.makequotable.ShowImage = true;
+            this.makequotable.SuperTip = "如果您遇到了意外的错误，或是无意间删除了不希望删除的引用标记，抑或是有加载项尚不支持自动插入的可引用内容，均可使用此功能。";
+            this.makequotable.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.makequotable_Click);
+            // 
             // quotes
             // 
             ribbonDialogLauncherImpl2.Image = global::PaperWriting.Properties.Resources.icons8_get_quote_48;
@@ -220,7 +235,7 @@
             this.addQuote.Image = global::PaperWriting.Properties.Resources.icons8_quote_48;
             this.addQuote.Label = "添加引用";
             this.addQuote.Name = "addQuote";
-            this.addQuote.ScreenTip = "添加指向您创建的带编号内容";
+            this.addQuote.ScreenTip = "添加指向您创建的带编号内容的引用";
             this.addQuote.ShowImage = true;
             this.addQuote.SuperTip = "编号内容可以是由本加载项创建的，或是您自己手动添加的书签，书签名必须以受支持的前缀开头。";
             this.addQuote.ButtonClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.addQuote_ButtonClick);
@@ -271,6 +286,7 @@
         private Microsoft.Office.Tools.Ribbon.RibbonButton h1;
         private Microsoft.Office.Tools.Ribbon.RibbonButton h2;
         private Microsoft.Office.Tools.Ribbon.RibbonButton h3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton makequotable;
     }
 
     partial class ThisRibbonCollection
