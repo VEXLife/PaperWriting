@@ -42,7 +42,7 @@
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
     <ProductName>论文辅助Microsoft Word加载项</ProductName>
     <PublisherName>Midden Vexu</PublisherName>
-    <SupportUrl />
+    <SupportUrl>https://gitee.com/vexlife/paper-writing</SupportUrl>
     <FriendlyName>PaperWriting</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>

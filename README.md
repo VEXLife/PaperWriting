@@ -1,12 +1,15 @@
 ﻿# 论文写作辅助加载项
 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/VEXLife/PaperWriting) ![GitHub](https://img.shields.io/github/license/VEXLife/PaperWriting) ![GitHub issues](https://img.shields.io/github/issues/VEXLife/PaperWriting)  ![Gitee issues](https://img.shields.io/badge/dynamic/json?label=Gitee%20Issues&query=%24.open_issues_count&url=http%3A%2F%2Fgitee.com%2Fapi%2Fv5%2Frepos%2FVEXLife%2FPaperWriting&logo=gitee&style=flat) ![GitHub Pull requests](https://img.shields.io/github/issues-pr/VEXLife/PaperWriting) ![Contribution](https://img.shields.io/static/v1?label=contribution&message=welcome&color=%23ff66ef&link=http://github.com/VEXLife/PaperWriting) ![GitHub Repo stars](https://img.shields.io/github/stars/VEXLife/PaperWriting?style=social) ![GitHub forks](https://img.shields.io/github/forks/VEXLife/PaperWriting?style=social) ![Gitee Repo stars](https://img.shields.io/badge/dynamic/json?label=Gitee%20Stars&query=%24.stargazers_count&url=http%3A%2F%2Fgitee.com%2Fapi%2Fv5%2Frepos%2FVEXLife%2Fpaper-writing&logo=gitee&style=social) ![Gitee forks](https://img.shields.io/badge/dynamic/json?label=Gitee%20Forks&query=%24.forks_count&url=http%3A%2F%2Fgitee.com%2Fapi%2Fv5%2Frepos%2FVEXLife%2Fpaper-writing&logo=gitee&style=social)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/VEXLife/PaperWriting) ![GitHub license](https://img.shields.io/github/license/VEXLife/PaperWriting) ![GitHub issues](https://img.shields.io/github/issues/VEXLife/PaperWriting) ![Gitee issues](https://img.shields.io/badge/dynamic/json?label=Gitee%20Issues&query=%24.open_issues_count&url=http%3A%2F%2Fgitee.com%2Fapi%2Fv5%2Frepos%2FVEXLife%2Fpaper-writing&logo=gitee&style=flat) ![GitHub Pull requests](https://img.shields.io/github/issues-pr/VEXLife/PaperWriting) ![Contribution](https://img.shields.io/static/v1?label=contribution&message=welcome&color=%23ff66ef&link=http://github.com/VEXLife/PaperWriting) ![GitHub Repo stars](https://img.shields.io/github/stars/VEXLife/PaperWriting?style=social) ![GitHub forks](https://img.shields.io/github/forks/VEXLife/PaperWriting?style=social) ![Gitee Repo stars](https://img.shields.io/badge/dynamic/json?label=Gitee%20Stars&query=%24.stargazers_count&url=http%3A%2F%2Fgitee.com%2Fapi%2Fv5%2Frepos%2FVEXLife%2Fpaper-writing&logo=gitee&style=social) ![Gitee forks](https://img.shields.io/badge/dynamic/json?label=Gitee%20Forks&query=%24.forks_count&url=http%3A%2F%2Fgitee.com%2Fapi%2Fv5%2Frepos%2FVEXLife%2Fpaper-writing&logo=gitee&style=social)
 
 ## 关于本软件
 
 论文辅助写作加载项是一个可以帮助您在不支持的文字处理软件中快速实现类似于LaTeX编号、图片/表格描述等论文编写过程中常见操作的一个开源、免费的加载项。推荐您结合[Zotero](https://www.zotero.org/)、[EndNote](https://www.endnote.com)等文献管理软件使用，进一步改善论文写作体验！
-加载项的基本原理受Bilibili UP主[@大啊好我r中之](https://space.bilibili.com/239828907)启发。
+
+加载项的基本原理受Bilibili UP主[@大啊好我r中之](https://space.bilibili.com/239828907)启发，**已获得UP主本人许可**。
+
 GitHub仓库：<https://github.com/VEXLife/PaperWriting>
+
 Gitee仓库：<https://gitee.com/VEXLife/paper-writing>
 
 ## 支持的平台
@@ -68,6 +71,7 @@ Gitee仓库：<https://gitee.com/VEXLife/paper-writing>
 
 1. 下载并安装Visual Studio Installer
 2. 勾选“Office/SharePoint开发”
+![勾选“Office/SharePoint开发”](screenshots/dev.png)
 3. 安装即可。
 
 ### 需要的开发知识
